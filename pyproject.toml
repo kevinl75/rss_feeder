@@ -1,13 +1,13 @@
 [tool.poetry]
-name = "rss-collector-app"
+name = "rss_feeder"
 version = "0.1.0"
-description = "Streamlit application that collect and organize rss feed for news curation"
+description = "Streamlit application that collect and organize rss feeds for news curation."
 authors = ["kevinl75 <kevin.letupe@gmail.com>"]
 license = "MIT"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = "^3.11"
 streamlit = "^1.35.0"
 feedparser = "^6.0.11"
 

@@ -49,26 +49,24 @@ def update_rss_feeds(
     return True
 
 
-def remove_rss_feeds(feed_name: str, feed_url: str ) -> None:
+def remove_rss_feeds(feed_name: str) -> None:
 
     feeds = {}
 
     with open("config/rss_feeds_config.json", "r") as fd:
         feeds = json.load(fd)
     
-    feeds["rss_feeds"].remove({
-        "name": feed_name,
-        "url": feed_url
-    })
+    is_removed = False
+    for feed in feeds["rss_feeds"]:
+        if feed["name"] == feed_name:
+            feeds["rss_feeds"].remove(feed)
+            is_removed = True
+            break
     
     with open("config/rss_feeds_config.json", "w") as fd:
         json.dump(feeds, fd)
-
-    load_feeds_config()
-    load_feeds()
-    if st.session_state["actual_rss_feed"] == feed_name:
-        if len(st.session_state["flux_rss_url"]) > 0:
-            st.session_state["actual_rss_feed"] = st.session_state["flux_rss_url"][0]["name"]
+    
+    return is_removed
 
 
 def load_feeds_config():
